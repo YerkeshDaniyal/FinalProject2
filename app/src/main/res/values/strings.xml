@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Final Project2</string>
+    <string name="app_name">HavaDurumuMrC</string>
+    <string name="error_message">Error, Try Again!</string>
 </resources>
