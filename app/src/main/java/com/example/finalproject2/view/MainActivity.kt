@@ -29,6 +29,26 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.menu_home -> {
+                if (currentFragment == homeFragment) return false
+                currentFragment = homeFragment
+            }
+            R.id.menu_search -> {
+                if (currentFragment == searchFragment) return false
+                currentFragment = searchFragment
+            }
+        }
+
+        currentFragment?.let {
+            replaceFragment(R.id.fragment, it)
+        }
+
+        return true
+    }
+
 
 
 
