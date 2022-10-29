@@ -1,4 +1,5 @@
 package com.example.finalproject2.viewmodel
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject2.model.IViewProgress
@@ -8,29 +9,23 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+class SearchViewModel(private val view: IViewProgress, private val repository: MainRepository): ViewModel() {
 
-class MainViewModel(val view: IViewProgress, private val repository: MainRepository) : ViewModel() {
+    val searchCity = MutableLiveData<WeatherApiResult>()
+    val errorMessage = MutableLiveData<String>()
 
-    var city = MutableLiveData<WeatherApiResult>()
-    var errorMessage = MutableLiveData<String>()
-    var requestLocation = MutableLiveData<Boolean>()
-
-    fun locationPhone(lat: String, lon: String) {
-
+    fun fetchCity(city: String) {
         view.showProgress(true)
-        val request = repository.fetchLocationPhone(lat, lon)
+        val request = repository.fetchCity(city)
 
         request.enqueue(object : Callback<WeatherApiResult>{
             override fun onResponse(
                 call: Call<WeatherApiResult>,
                 response: Response<WeatherApiResult>
             ) {
-                if (response.isSuccessful){
-                    city.postValue(response.body())
-                    view.showProgress(false)
-                }
-                else
-                    errorMessage.postValue("Location Not Found")
+                view.showProgress(false)
+                if (response.isSuccessful) searchCity.postValue(response.body())
+                else errorMessage.postValue("City not found")
             }
 
             override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {
@@ -38,13 +33,5 @@ class MainViewModel(val view: IViewProgress, private val repository: MainReposit
             }
 
         })
-
-    }
-
-    fun requestPermissionGranted(){
-        view.showProgress(false)
-        requestLocation.value = true
     }
 }
-
-
