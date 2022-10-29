@@ -49,6 +49,23 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return true
     }
 
+    private fun replaceFragment(id: Int, fragment: Fragment) {
+
+        if (supportFragmentManager.findFragmentById(id) == null) {
+            supportFragmentManager.beginTransaction().apply {
+                add(id, fragment)
+                commit()
+            }
+        } else {
+            supportFragmentManager.beginTransaction().apply {
+                replace(id, fragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+    }
+
 
 
 
