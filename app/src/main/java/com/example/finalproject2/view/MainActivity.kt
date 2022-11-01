@@ -2,6 +2,7 @@ package com.example.finalproject2.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.finalproject2.R
@@ -69,5 +70,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
 
-
 }
+
