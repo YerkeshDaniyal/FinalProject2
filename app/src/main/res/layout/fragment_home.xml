@@ -77,5 +77,83 @@
         app:layout_constraintEnd_toStartOf="@id/home_img_humidity"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/home_txt_feelLike"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:fontFamily="@font/poppins"
+        android:text="0C°"
+        app:layout_constraintBottom_toTopOf="@id/txtFeels"
+        app:layout_constraintEnd_toEndOf="@+id/home_img_feelsLike"
+        app:layout_constraintStart_toStartOf="@+id/home_img_feelsLike"
+        app:layout_constraintTop_toBottomOf="@+id/home_img_feelsLike" />
+
+    <TextView
+        android:id="@+id/txtFeels"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:layout_width="60dp"
+        android:text="Feels like"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/home_txt_feelLike"
+        app:layout_constraintStart_toStartOf="@+id/home_txt_feelLike"
+        app:layout_constraintTop_toBottomOf="@+id/home_txt_feelLike" />
+
+
+    <ImageView
+        android:id="@+id/home_img_humidity"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/humidity"
+        app:layout_constraintBottom_toBottomOf="@id/home_img_feelsLike"
+        app:layout_constraintEnd_toStartOf="@id/home_img_wind"
+        app:layout_constraintStart_toEndOf="@id/home_img_feelsLike" />
+
+    <TextView
+        android:id="@+id/home_txt_humidity"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:fontFamily="@font/poppins"
+        android:text="0%"
+        app:layout_constraintBottom_toTopOf="@id/txtHumidity"
+        app:layout_constraintEnd_toEndOf="@+id/home_img_humidity"
+        app:layout_constraintStart_toStartOf="@+id/home_img_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/home_img_humidity" />
+
+    <TextView
+        android:id="@+id/txtHumidity"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:text="humidity"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/home_txt_humidity"
+        app:layout_constraintStart_toStartOf="@+id/home_txt_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/home_txt_humidity" />
+
+    <ImageView
+        android:id="@+id/home_img_wind"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/speed_wind"
+        app:layout_constraintBottom_toBottomOf="@id/home_img_humidity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home_img_humidity" />
+
+    <TextView
+        android:id="@+id/home_txt_wind"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:fontFamily="@font/poppins"
+        android:text="0 m/s"
+        app:layout_constraintBottom_toTopOf="@id/txtSpeedWind"
+        app:layout_constraintEnd_toEndOf="@+id/home_img_wind"
+        app:layout_constraintStart_toStartOf="@+id/home_img_wind"
+        app:layout_constraintTop_toBottomOf="@+id/home_img_wind" />
+
+    <TextView
+        android:id="@+id/txtSpeedWind"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:layout_width="60dp"
+        android:text="speed wind"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/home_txt_wind"
+        app:layout_constraintStart_toStartOf="@+id/home_txt_wind"
+        app:layout_constraintTop_toBottomOf="@+id/home_txt_wind" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
