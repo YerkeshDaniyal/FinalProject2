@@ -17,7 +17,20 @@ class SearchViewModel(private val view: IViewProgress, private val repository: M
     fun fetchCity(city: String) {
         view.showProgress(true)
         val request = repository.fetchCity(city)
+        request.enqueue(object : Callback<WeatherApiResult>{
+            override fun onResponse(
+                call: Call<WeatherApiResult>,
+                response: Response<WeatherApiResult>
+            ) {
+                view.showProgress(false)
+                if (response.isSuccessful) searchCity.postValue(response.body())
+                else errorMessage.postValue("City not found")
+            }
+            override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {
+                errorMessage.postValue("Server error")
+            }
 
+        })
 
     }
 }
