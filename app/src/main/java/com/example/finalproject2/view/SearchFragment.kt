@@ -20,6 +20,10 @@ import com.example.finalproject2.databinding.FragmentSearchBinding
 import com.example.finalproject2.model.IViewProgress
 import com.example.finalproject2.model.WeatherApiResult
 import com.example.finalproject2.rest.WeatherRetrofitConfig
+ 
+import com.example.finalproject2.viewmodel.SearchViewModel
+import com.example.finalproject2.viewmodel.SearchViewModelFactory
+ 
 import kotlin.math.roundToInt
 
 private val retrofitService = WeatherRetrofitConfig.getInstance()
