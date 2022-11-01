@@ -15,4 +15,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/home_txt_city"
+        style="@style/Theme.FinalProject2.BaseTextview"
+        android:fontFamily="@font/poppins"
+        android:textSize="28sp"
+        android:singleLine="true"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@id/home_img_now"
+        app:layout_constraintStart_toStartOf="@id/home_img_now"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
