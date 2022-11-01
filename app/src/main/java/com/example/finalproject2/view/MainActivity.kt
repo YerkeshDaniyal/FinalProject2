@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.ActivityMainBinding
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private lateinit var binding: ActivityMainBinding

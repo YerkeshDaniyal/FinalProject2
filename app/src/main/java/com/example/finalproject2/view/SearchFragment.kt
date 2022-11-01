@@ -14,16 +14,14 @@ import androidx.lifecycle.ViewModelProvider
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject2.model.MainRepository
-
+import com.example.finalproject2.R
 import com.example.finalproject2.model.SearchAdapter
-
+import com.example.finalproject2.databinding.FragmentSearchBinding
 import com.example.finalproject2.model.IViewProgress
 import com.example.finalproject2.model.WeatherApiResult
 import com.example.finalproject2.rest.WeatherRetrofitConfig
 import com.example.finalproject2.viewmodel.SearchViewModel
 import com.example.finalproject2.viewmodel.SearchViewModelFactory
-import com.example.finalproject2.R
-import com.example.finalproject2.databinding.FragmentSearchBinding
 import kotlin.math.roundToInt
 
 private val retrofitService = WeatherRetrofitConfig.getInstance()
