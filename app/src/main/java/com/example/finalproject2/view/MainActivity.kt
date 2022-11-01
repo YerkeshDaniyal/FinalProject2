@@ -2,12 +2,10 @@ package com.example.finalproject2.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.ActivityMainBinding
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private lateinit var binding: ActivityMainBinding
@@ -28,6 +26,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         binding.mainNavBottom.setOnNavigationItemSelectedListener(this)
         binding.mainNavBottom.selectedItemId = R.id.menu_home
+
+
 
     }
 
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return true
     }
 
+
     private fun replaceFragment(id: Int, fragment: Fragment) {
 
         if (supportFragmentManager.findFragmentById(id) == null) {
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
 
     }
-
 
 
 }
