@@ -13,6 +13,13 @@
     android:background="@drawable/card_style"
     android:layout_width="match_parent"
     android:layout_height="150dp">
-
+        <TextView
+            android:id="@+id/item_txt_country"
+            style="@style/Theme.FinalProject2.BaseTextview"
+            android:text="country"
+            android:layout_margin="12dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
