@@ -14,7 +14,6 @@ private lateinit var searchFragment: SearchFragment
 
 private var currentFragment: Fragment? = null
 
-
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +30,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {

@@ -22,3 +22,4 @@ class ExampleInstrumentedTest {
         assertEquals("com.example.finalproject2", appContext.packageName)
     }
 }
+

@@ -1,6 +1,5 @@
 package com.example.finalproject2.view
 
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,7 +12,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.FragmentHomeBinding
@@ -32,7 +33,6 @@ private lateinit var lat: String
 private lateinit var lon: String
 private lateinit var viewModel: MainViewModel
 
-@Suppress("DEPRECATION")
 class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
     private var binding: FragmentHomeBinding? = null
@@ -51,13 +51,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
         showProgress(true)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
 
         locationPhone()
 
-        viewModel.city.observe(viewLifecycleOwner) { weather ->
+        viewModel.city.observe(viewLifecycleOwner, Observer { weather ->
 
             binding?.let {
                 with(it) {
@@ -85,11 +84,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
                     }
                 }
             }
-        }
+        })
 
-        viewModel.errorMessage.observe(this) {
+        viewModel.errorMessage.observe(this, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-        }
+        })
 
     }
 
@@ -100,7 +99,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
     }
 
 
-    @SuppressLint("MissingPermission", "VisibleForTests")
+    @SuppressLint("MissingPermission")
     private fun locationPhone() {
         val location = FusedLocationProviderClient(requireContext())
 
@@ -128,11 +127,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
                     }
 
                     //obligatory func to execute
-                    @Deprecated("Deprecated in Java", ReplaceWith(
-                        "super.onStatusChanged(provider, status, extras)",
-                        "android.location.LocationListener"
-                    )
-                    )
                     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
                         super.onStatusChanged(provider, status, extras)
                     }
