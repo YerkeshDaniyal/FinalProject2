@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/home_txt_city"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins"
         android:textSize="28sp"
         android:singleLine="true"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/home_txt_weather"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins"
 
@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/home_txt_stats"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@id/home_txt_weather"
         app:layout_constraintStart_toStartOf="@id/home_txt_weather"
@@ -59,7 +59,7 @@
 
     <TextView
         android:id="@+id/home_txt_temp"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins_medium"
         android:textSize="52sp"
         app:layout_constraintBottom_toTopOf="@+id/home_img_humidity"
@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/home_txt_feelLike"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins"
         android:text="0C°"
         app:layout_constraintBottom_toTopOf="@id/txtFeels"
@@ -89,7 +89,7 @@
 
     <TextView
         android:id="@+id/txtFeels"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:layout_width="60dp"
         android:text="Feels like"
         android:textAlignment="center"
@@ -109,7 +109,7 @@
 
     <TextView
         android:id="@+id/home_txt_humidity"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins"
         android:text="0%"
         app:layout_constraintBottom_toTopOf="@id/txtHumidity"
@@ -119,7 +119,7 @@
 
     <TextView
         android:id="@+id/txtHumidity"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:text="humidity"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/home_txt_humidity"
@@ -137,7 +137,7 @@
 
     <TextView
         android:id="@+id/home_txt_wind"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:fontFamily="@font/poppins"
         android:text="0 m/s"
         app:layout_constraintBottom_toTopOf="@id/txtSpeedWind"
@@ -147,12 +147,12 @@
 
     <TextView
         android:id="@+id/txtSpeedWind"
-        style="@style/Theme.FinalProject2.BaseTextview"
+        style="@style/Theme.ClimatyWeather.BaseTextview"
         android:layout_width="60dp"
         android:text="speed wind"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/home_txt_wind"
         app:layout_constraintStart_toStartOf="@+id/home_txt_wind"
         app:layout_constraintTop_toBottomOf="@+id/home_txt_wind" />
- 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
