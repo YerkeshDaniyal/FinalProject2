@@ -39,4 +39,8 @@ class MainViewModel(val view: IViewProgress, private val repository: MainReposit
         })
 
     }
+    fun requestPermissionGranted(){
+        view.showProgress(false)
+        requestLocation.value = true
+    }
 }
