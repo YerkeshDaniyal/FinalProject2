@@ -1,5 +1,4 @@
-package com.example.finalproject2.viewmodel
- 
+package com.example.finalproject2.viewmodel 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject2.model.IViewProgress
@@ -18,9 +17,7 @@ class MainViewModel(val view: IViewProgress, private val repository: MainReposit
 
     fun locationPhone(lat: String, lon: String) {
 
-
 class MainViewModel(val view: IViewProgress, private val repository: MainRepository) : ViewModel() {
-
     var city = MutableLiveData<WeatherApiResult>()
     var errorMessage = MutableLiveData<String>()
     var requestLocation = MutableLiveData<Boolean>()
@@ -31,7 +28,7 @@ class MainViewModel(val view: IViewProgress, private val repository: MainReposit
         view.showProgress(true)
         val request = repository.fetchLocationPhone(lat, lon)
 
-        request.enqueue(object : Callback<WeatherApiResult>{
+        request.enqueue(object : Callback<WeatherApiResult> {
             override fun onResponse(
                 call: Call<WeatherApiResult>,
                 response: Response<WeatherApiResult>
@@ -58,10 +55,12 @@ class MainViewModel(val view: IViewProgress, private val repository: MainReposit
         requestLocation.value = true
     }
 }
+ 
 
     fun requestPermissionGranted(){
         view.showProgress(false)
         requestLocation.value = true
     }
 }
+ 
  
