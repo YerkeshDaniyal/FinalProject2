@@ -34,4 +34,9 @@ object MainModule {
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db").build()
     }
+
+    @Provides
+    fun provideWeatherDao(appDatabase: AppDatabase): WeatherDao {
+        return appDatabase.weatherDao()
+    }
 }
