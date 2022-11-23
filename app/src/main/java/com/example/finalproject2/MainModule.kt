@@ -29,4 +29,9 @@ object MainModule {
             .build()
         return retrofit.create(WeatherRetrofitConfig::class.java)
     }
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db").build()
+    }
 }
