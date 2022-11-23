@@ -3,7 +3,7 @@ package com.example.finalproject2.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.model.MainRepository
+import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.model.WeatherApiResult
 import retrofit2.Call
 import retrofit2.Callback

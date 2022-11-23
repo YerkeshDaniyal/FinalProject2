@@ -1,20 +1,27 @@
 package com.example.finalproject2.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "weather_result")
 data class WeatherApiResult(
-    val coord: Coordiante,
+    @Embedded val coord: Coordiante,
     val weather: List<Weather>,
-    val sys: Sys,
-    val main: Main,
-    val wind: Wind,
-    val name: String
+    @Embedded val sys: Sys,
+    @Embedded val main: Main,
+    @Embedded val wind: Wind,
+    @PrimaryKey val name: String
 )
 
 data class Wind(
     val speed: Float
-    )
+)
 
+@Entity
 data class Weather(
-    val id: Int,
+    @PrimaryKey val id: Int,
+    val cityName: String,
     val main: String,
     val description: String,
     val icon: String

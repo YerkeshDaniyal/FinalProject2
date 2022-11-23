@@ -3,7 +3,7 @@ package com.example.finalproject2.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.model.MainRepository
+import com.example.finalproject2.repo.MainRepository
 
 class SearchViewModelFactory(private val view: IViewProgress, private val repository: MainRepository): ViewModelProvider.Factory{
 

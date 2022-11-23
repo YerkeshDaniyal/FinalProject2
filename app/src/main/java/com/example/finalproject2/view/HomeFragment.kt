@@ -12,14 +12,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.FragmentHomeBinding
 import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.model.MainRepository
+import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.rest.WeatherRetrofitConfig
 import com.example.finalproject2.viewmodel.MainViewModel
 import com.example.finalproject2.viewmodel.MainViewModelFactory
@@ -109,7 +108,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
         location.lastLocation.addOnSuccessListener {
 
-            //getting location if there is some already available
+
             if (it != null) {
                 lon = it.longitude.toString()
                 lat = it.latitude.toString()
