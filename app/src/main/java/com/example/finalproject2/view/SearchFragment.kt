@@ -2,49 +2,65 @@ package com.example.finalproject2.view
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-
-import androidx.lifecycle.ViewModelProvider
-
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.finalproject2.model.MainRepository
+import com.example.climatyweather.viewmodel.SearchViewModel
 import com.example.finalproject2.R
-import com.example.finalproject2.model.SearchAdapter
 import com.example.finalproject2.databinding.FragmentSearchBinding
 import com.example.finalproject2.model.IViewProgress
+import com.example.finalproject2.repo.MainRepository
+import com.example.finalproject2.adapter.SearchAdapter
 import com.example.finalproject2.model.WeatherApiResult
-import com.example.finalproject2.rest.WeatherRetrofitConfig
-import com.example.finalproject2.viewmodel.SearchViewModel
-import com.example.finalproject2.viewmodel.SearchViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-private val retrofitService = WeatherRetrofitConfig.getInstance()
-private lateinit var viewModel: SearchViewModel
-private var itemsCity: ArrayList<WeatherApiResult> = arrayListOf()
 
+
+@AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
+    private var _binding: FragmentSearchBinding? = null
 
-    private var binding: FragmentSearchBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+    private lateinit var adapter: SearchAdapter
+
+    @Inject
+    lateinit var repository: MainRepository
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.searchRv.layoutManager = LinearLayoutManager(requireContext())
+        adapter = SearchAdapter { weather -> openDialog(weather) }
+        binding.searchRv.adapter = adapter
+        viewModel.showProgress.observe(viewLifecycleOwner) {
+            showProgress(it)
+        }
+    }
 
-        binding = FragmentSearchBinding.bind(view)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        binding?.searchRv?.layoutManager = LinearLayoutManager(requireContext())
-
-        viewModel = ViewModelProvider(
-            this, SearchViewModelFactory(this, MainRepository(retrofitService))
-        ).get(
-             SearchViewModel::class.java
-        )
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onResume() {
@@ -54,13 +70,11 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
 
-        viewModel.searchCity.observe(viewLifecycleOwner, Observer {
-            if (!itemsCity.contains(it)) itemsCity.add(it)
-            binding?.searchRv?.adapter?.notifyDataSetChanged()
-            binding?.searchRv?.adapter = SearchAdapter(itemsCity) { weather -> openDialog(weather) }
+        viewModel.searchCities.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
         })
 
-        binding?.searchSrc?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchSrc.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(submit: String?): Boolean {
                 viewModel.fetchCity(submit.toString())
                 return false
@@ -116,7 +130,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
     }
 
     override fun showProgress(enabled: Boolean) {
-        if (enabled) binding?.progressCircular?.visibility = View.VISIBLE
-        else binding?.progressCircular?.visibility = View.GONE
+        if (enabled) binding.progressCircular.visibility = View.VISIBLE
+        else binding.progressCircular.visibility = View.GONE
     }
 }

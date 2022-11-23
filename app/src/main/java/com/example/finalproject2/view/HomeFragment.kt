@@ -12,43 +12,43 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.example.finalproject2.repo.MainRepository
+import com.example.finalproject2.viewmodel.MainViewModel
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.FragmentHomeBinding
 import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.model.MainRepository
-import com.example.finalproject2.rest.WeatherRetrofitConfig
-import com.example.finalproject2.viewmodel.MainViewModel
-import com.example.finalproject2.viewmodel.MainViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 
 const val LOCALITION_PERMISSON_CODE = 1000
-private val retrofitService = WeatherRetrofitConfig.getInstance()
 private lateinit var lat: String
 private lateinit var lon: String
-private lateinit var viewModel: MainViewModel
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
     private var binding: FragmentHomeBinding? = null
+
+    @Inject
+    lateinit var repository: MainRepository
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentHomeBinding.bind(view)
 
-        viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(this, MainRepository(retrofitService))
-        )[MainViewModel::class.java]
-
         permissions()
         showProgress(true)
+        viewModel.showProgress.observe(viewLifecycleOwner) {
+            showProgress(it)
+        }
     }
 
     override fun onResume() {
