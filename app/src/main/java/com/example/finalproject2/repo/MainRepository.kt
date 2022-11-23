@@ -49,4 +49,5 @@ class MainRepository @Inject constructor(
     suspend fun insertSearchedCity(searchedCity: WeatherApiResult) {
         weatherDao.insertCity(searchedCity)
     }
+
 }
