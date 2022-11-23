@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.finalproject2.model.MainRepository
+import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.R
 import com.example.finalproject2.adapter.SearchAdapter
 import com.example.finalproject2.databinding.FragmentSearchBinding
