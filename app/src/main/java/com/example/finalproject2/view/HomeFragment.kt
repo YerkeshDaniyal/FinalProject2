@@ -109,7 +109,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
         location.lastLocation.addOnSuccessListener {
 
-            //getting location if there is some already available
+
             if (it != null) {
                 lon = it.longitude.toString()
                 lat = it.latitude.toString()
