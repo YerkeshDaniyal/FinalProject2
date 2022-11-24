@@ -1,8 +1,8 @@
 package com.example.finalproject2.repo
 
+import com.example.finalproject2.model.WeatherApiResult
 import com.example.finalproject2.rest.WeatherRetrofitConfig
 import com.example.finalproject2.room.WeatherDao
-import com.example.finalproject2.model.WeatherApiResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -49,5 +49,4 @@ class MainRepository @Inject constructor(
     suspend fun insertSearchedCity(searchedCity: WeatherApiResult) {
         weatherDao.insertCity(searchedCity)
     }
-
 }

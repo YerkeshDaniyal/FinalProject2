@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+
+
 
 private lateinit var binding: ActivityMainBinding
 private lateinit var homeFragment: HomeFragment
@@ -14,6 +17,7 @@ private lateinit var searchFragment: SearchFragment
 
 private var currentFragment: Fragment? = null
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
