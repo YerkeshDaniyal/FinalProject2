@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
+
 interface WeatherRetrofitConfig {
 
     //weather?q={city}&units=metric&appid=fccbdc41f2bb5a0b09266288a1a820ce&lang=pt_br
@@ -14,7 +15,7 @@ interface WeatherRetrofitConfig {
         @Query("q") city: String,
         @Query("units") units: String = "metric",
         @Query("appid") appid: String = "fccbdc41f2bb5a0b09266288a1a820ce",
-        @Query("lang") lang: String = "pt_br"
+        @Query("lang") lang: String = "en_us"
 
     ): Response<WeatherApiResult>
 
@@ -25,6 +26,10 @@ interface WeatherRetrofitConfig {
         @Query("lon") lon: String,
         @Query("appid") appid: String = "fccbdc41f2bb5a0b09266288a1a820ce",
         @Query("units") units: String = "metric",
-        @Query("lang") lang: String = "pt_br"
+        @Query("lang") lang: String = "en_us"
     ): Response<WeatherApiResult>
 }
+
+
+
+

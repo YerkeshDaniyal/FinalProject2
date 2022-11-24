@@ -14,11 +14,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.climatyweather.viewmodel.SearchViewModel
+
+import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.R
+import com.example.finalproject2.adapter.SearchAdapter
+
 import com.example.finalproject2.databinding.FragmentSearchBinding
 import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.repo.MainRepository
-import com.example.finalproject2.adapter.SearchAdapter
 import com.example.finalproject2.model.WeatherApiResult
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

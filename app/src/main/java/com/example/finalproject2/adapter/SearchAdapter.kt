@@ -28,6 +28,7 @@ class SearchAdapter(
         fun bind(city: WeatherApiResult, onItemClicked: (WeatherApiResult) -> Unit) {
 
             cityName.text = city.name
+
             country.text = city.sys.country
             status.text = city.weather[0].main
             temp.text = "C° ${city.main.temp.roundToInt()}"
@@ -72,3 +73,5 @@ object DiffUtilCallback : DiffUtil.ItemCallback<WeatherApiResult>() {
         return oldItem == newItem
     }
 }
+
+

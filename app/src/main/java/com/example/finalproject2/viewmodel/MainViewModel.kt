@@ -9,7 +9,7 @@ import com.example.finalproject2.repo.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.text.Typography.dagger
+
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
