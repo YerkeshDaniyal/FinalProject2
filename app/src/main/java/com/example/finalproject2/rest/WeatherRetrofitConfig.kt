@@ -1,11 +1,15 @@
 package com.example.finalproject2.rest
 
+ 
+import retrofit2.http.*
+import com.example.finalproject2.model.WeatherApiResult
+import retrofit2.Response
 import com.example.finalproject2.model.WeatherApiResult
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-
+ 
 
 interface WeatherRetrofitConfig {
 
@@ -20,6 +24,36 @@ interface WeatherRetrofitConfig {
     ): Response<WeatherApiResult>
 
     //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+ 
+//    @GET("weather")
+//    suspend fun fetchLocationPhone(
+//        @Query("lat") lat: String,
+//        @Query("lon") lon: String,
+//        @Query("appid") appid: String = "fccbdc41f2bb5a0b09266288a1a820ce",
+//        @Query("units") units: String = "metric",
+//        @Query("lang") lang: String = "en_us"
+//    ): Response<WeatherApiResult>
+
+
+//    companion object {
+//
+//        val retrofitService: WeatherRetrofitConfig by lazy {
+//            val retrofit = Retrofit.Builder()
+//                .baseUrl("https://api.openweathermap.org/data/2.5/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//
+//            retrofit.create(WeatherRetrofitConfig::class.java)
+//
+//        }
+//
+//        fun getInstance(): WeatherRetrofitConfig {
+//            return retrofitService
+//        }
+//
+//    }
+}
+ 
     @GET("weather")
     suspend fun fetchLocationPhone(
         @Query("lat") lat: String,
@@ -32,4 +66,4 @@ interface WeatherRetrofitConfig {
 
 
 
-
+ 

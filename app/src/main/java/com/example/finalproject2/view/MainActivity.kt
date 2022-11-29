@@ -9,7 +9,7 @@ import com.example.finalproject2.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
-
+ 
 
 private lateinit var binding: ActivityMainBinding
 private lateinit var homeFragment: HomeFragment
@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainNavBottom.selectedItemId = R.id.menu_home
 
 
-
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -54,8 +52,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         return true
     }
-
-
     private fun replaceFragment(id: Int, fragment: Fragment) {
 
         if (supportFragmentManager.findFragmentById(id) == null) {
@@ -73,6 +69,4 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
-
 }
-

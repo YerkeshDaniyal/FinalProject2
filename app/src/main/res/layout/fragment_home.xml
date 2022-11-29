@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/preto">
 
+    <ImageView
+        android:id="@+id/home_city_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <ProgressBar
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
