@@ -1,38 +1,35 @@
 package com.example.finalproject2.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject2.model.IViewProgress
+import androidx.lifecycle.viewModelScope
+import com.example.finalproject2.repo.Resource
 import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.model.WeatherApiResult
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(private val view: IViewProgress, private val repository: MainRepository): ViewModel() {
-
-    val searchCity = MutableLiveData<WeatherApiResult>()
+@HiltViewModel
+class SearchViewModel @Inject constructor(
+    private val repository: MainRepository
+) : ViewModel() {
+    val searchCities: LiveData<List<WeatherApiResult>> = repository.getAllSearchedCities()
     val errorMessage = MutableLiveData<String>()
-
+    val showProgress = MutableLiveData(false)
     fun fetchCity(city: String) {
-        view.showProgress(true)
-        val request = repository.fetchCity(city)
- 
-        request.enqueue(object : Callback<WeatherApiResult>{
-            override fun onResponse(
-                call: Call<WeatherApiResult>,
-                response: Response<WeatherApiResult>
-            ) {
-                view.showProgress(false)
-                if (response.isSuccessful) searchCity.postValue(response.body())
-                else errorMessage.postValue("City not found")
+        showProgress.postValue(true)
+        viewModelScope.launch {
+            showProgress.postValue(false)
+            when (val response = repository.fetchCity(city)) {
+                is Resource.Success -> {
+               //все должно быть хорошо
+                }
+                is Resource.Error -> errorMessage.postValue(response.message.toString())
             }
- 
-            override fun onFailure(call: Call<WeatherApiResult>, t: Throwable) {
-                errorMessage.postValue("Server error")
-            }
+        }
 
-        })
- 
     }
+
 }

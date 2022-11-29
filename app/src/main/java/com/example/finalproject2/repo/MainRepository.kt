@@ -11,7 +11,6 @@ class MainRepository @Inject constructor(
     private val weatherDao: WeatherDao,
     private val retrofitService: WeatherRetrofitConfig
 ) {
-
     suspend fun fetchCity(city: String): Resource<Unit> {
         return withContext(Dispatchers.IO) {
             try {
@@ -27,6 +26,8 @@ class MainRepository @Inject constructor(
                 Resource.Error("Server error")
             }
         }
+
+
     }
 
     suspend fun fetchLocationPhone(lat: String, lon: String): Resource<WeatherApiResult?> {
@@ -42,10 +43,11 @@ class MainRepository @Inject constructor(
                 Resource.Error("Server error")
             }
         }
+
+
     }
 
     fun getAllSearchedCities() = weatherDao.getAll()
-
     suspend fun insertSearchedCity(searchedCity: WeatherApiResult) {
         weatherDao.insertCity(searchedCity)
     }
