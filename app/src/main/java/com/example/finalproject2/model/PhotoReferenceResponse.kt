@@ -32,8 +32,7 @@ data class Place(
         other as Place
 
         if (!photos.contentEquals(other.photos)) return false
-        // if(photos.contentEquals(other.photos)) return false
-        // return true
+        //
         return true
 
     }

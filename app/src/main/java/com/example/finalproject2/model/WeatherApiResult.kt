@@ -11,7 +11,8 @@ data class WeatherApiResult(
     @Embedded val sys: Sys,
     @Embedded val main: Main,
     @Embedded val wind: Wind,
-    @PrimaryKey val name: String
+    @PrimaryKey val name: String,
+    var photoReference: String? = null
 )
 
 data class Wind(

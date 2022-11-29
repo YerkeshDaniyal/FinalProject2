@@ -1,6 +1,7 @@
 package com.example.finalproject2
 import android.content.Context
 import androidx.room.Room
+import com.example.finalproject2.rest.GoogleMapsRetrofitService
 import com.example.finalproject2.room.AppDatabase
 import com.example.finalproject2.room.WeatherDao
 import com.example.finalproject2.rest.WeatherRetrofitConfig
@@ -30,9 +31,19 @@ object MainModule {
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db").build()
+            .fallbackToDestructiveMigration().build()
     }
     @Provides
     fun provideWeatherDao(appDatabase: AppDatabase): WeatherDao {
         return appDatabase.weatherDao()
+    }
+    @Provides
+    @Singleton
+    fun provideGoogleMapsRetrofitService(): GoogleMapsRetrofitService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://maps.googleapis.com/maps/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(GoogleMapsRetrofitService::class.java)
     }
 }

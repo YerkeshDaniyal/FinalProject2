@@ -22,9 +22,9 @@ class SearchViewModel @Inject constructor(
         showProgress.postValue(true)
         viewModelScope.launch {
             showProgress.postValue(false)
-            when (val response = repository.fetchCity(city)) {
+            when (val response = repository.fetchCity(city, apiKey)) {
                 is Resource.Success -> {
-               //все должно быть хорошо
+               /**все должно быть хорошо**/
                 }
                 is Resource.Error -> errorMessage.postValue(response.message.toString())
             }

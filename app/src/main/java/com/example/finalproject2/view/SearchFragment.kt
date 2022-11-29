@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.FragmentSearchBinding
 import com.example.finalproject2.model.IViewProgress
@@ -99,6 +100,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
         val txtFeelsLike = inflater.findViewById<TextView>(R.id.home_txt_feelLike)
         val txtHumidity = inflater.findViewById<TextView>(R.id.home_txt_humidity)
         val txtWind = inflater.findViewById<TextView>(R.id.home_txt_wind)
+        val imgCity = inflater.findViewById<ImageView>(R.id.home_city_photo)
 
         txtCity.text = weather.name
         txtTemp.text = "${weather.main.temp.roundToInt()}C°"
@@ -107,6 +109,12 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
         txtFeelsLike.text = "${weather.main.feels_like.roundToInt()}C°"
         txtHumidity.text = "${weather.main.humidity}%"
         txtWind.text = "${weather.wind.speed} m/s"
+        val requestUrl = String.format(
+            "https://maps.googleapis.com/maps/api/place/photo?photoreference=%s&key=%s&maxwidth=1400&maxheight=600",
+            weather.photoReference,
+            getString(R.string.places_api_key)
+        )
+        imgCity.load(requestUrl)
 
         when (weather.weather[0].icon) {
             "09d", "10d", "11d", "09n", "10n", "11n" -> imgTemp.setImageResource(

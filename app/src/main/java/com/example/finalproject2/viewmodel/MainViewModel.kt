@@ -16,7 +16,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
     var city = MutableLiveData<WeatherApiResult>()
     var errorMessage = MutableLiveData<String>()
-    var requestLocation = MutableLiveData<Boolean>()
     val showProgress = MutableLiveData(false)
 
     fun fetchCurCity(curCity: String, apiKey: String) {
