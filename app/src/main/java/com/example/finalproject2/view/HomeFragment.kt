@@ -9,12 +9,21 @@ import androidx.lifecycle.Observer
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.FragmentHomeBinding
 import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.repo.MainRepository
+import com.example.finalproject2.repo.MainRepositor 
 import com.example.finalproject2.viewmodel.MainViewModel
+import com.example.finalproject2.R
+import com.example.finalproject2.databinding.FragmentHomeBinding
+import com.example.finalproject2.model.IViewProgress
+import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.roundToInt
+ 
 
+const val LOCALITION_PERMISSON_CODE = 1000
+private lateinit var lat: String
+private lateinit var lon: String
+ 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
@@ -29,7 +38,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
         binding = FragmentHomeBinding.bind(view)
 
+ 
         viewModel.fetchCurCity(DEFAULT_CITY, getString(R.string.places_api_key))
+ 
+        permissions()
+        showProgress(true)
+ 
         viewModel.showProgress.observe(viewLifecycleOwner) {
             showProgress(it)
         }
@@ -73,7 +87,73 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
         })
 
     }
+ 
+    private fun permissions() {
+        if (!isPermissionGranted())
+            requestLocationPermission()
+        else viewModel.requestPermissionGranted()
+    }
 
+
+    @SuppressLint("MissingPermission")
+    private fun locationPhone() {
+        val location = FusedLocationProviderClient(requireContext())
+
+        val service = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val criteria = Criteria()
+        val bestProvider = service.getBestProvider(criteria, true).toString()
+
+        location.lastLocation.addOnSuccessListener {
+
+            //getting location if there is some already available
+            if (it != null) {
+                lon = it.longitude.toString()
+                lat = it.latitude.toString()
+                viewModel.locationPhone(lat, lon)
+            } else {
+                /*
+                Getting actually location if does not
+                exist one already prepared in cache phone
+                 */
+                service.requestLocationUpdates(bestProvider, 1000, 0f, object : LocationListener {
+                    override fun onLocationChanged(location: Location) {
+                        lat = location.latitude.toString()
+                        lon = location.longitude.toString()
+                        viewModel.locationPhone(lat, lon)
+                    }
+
+                    //obligatory func to execute
+                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+                        super.onStatusChanged(provider, status, extras)
+                    }
+                })
+            }
+
+        }
+
+    }
+
+
+    private fun requestLocationPermission() {
+        return ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ),
+            LOCALITION_PERMISSON_CODE
+        )
+    }
+
+    private fun isPermissionGranted(): Boolean {
+
+        viewModel.requestPermissionGranted()
+        return ActivityCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+ 
     override fun onDestroy() {
         super.onDestroy()
         binding = null

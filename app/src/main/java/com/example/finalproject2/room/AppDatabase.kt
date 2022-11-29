@@ -9,4 +9,7 @@ import com.example.finalproject2.model.WeatherApiResult
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun weatherDao(): WeatherDao
+
 }
+
+

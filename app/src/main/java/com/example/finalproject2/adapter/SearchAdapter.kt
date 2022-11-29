@@ -16,6 +16,7 @@ import kotlin.math.roundToInt
 class SearchAdapter(
     private val onItemClicked: (WeatherApiResult) -> Unit
 ) : ListAdapter<WeatherApiResult, RecyclerView.ViewHolder>(DiffUtilCallback) {
+
     private class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val cityName: TextView = itemView.item_txt_city
@@ -27,6 +28,7 @@ class SearchAdapter(
         fun bind(city: WeatherApiResult, onItemClicked: (WeatherApiResult) -> Unit) {
 
             cityName.text = city.name
+
             country.text = city.sys.country
             status.text = city.weather[0].main
             temp.text = "C° ${city.main.temp.roundToInt()}"
@@ -62,12 +64,14 @@ class SearchAdapter(
     }
 }
 
-    object DiffUtilCallback : DiffUtil.ItemCallback<WeatherApiResult>() {
-        override fun areItemsTheSame(oldItem: WeatherApiResult, newItem: WeatherApiResult): Boolean {
-            return oldItem.name == newItem.name
-        }
-
-        override fun areContentsTheSame(oldItem: WeatherApiResult, newItem: WeatherApiResult): Boolean {
-            return oldItem == newItem
-        }
+object DiffUtilCallback : DiffUtil.ItemCallback<WeatherApiResult>() {
+    override fun areItemsTheSame(oldItem: WeatherApiResult, newItem: WeatherApiResult): Boolean {
+        return oldItem.name == newItem.name
     }
+
+    override fun areContentsTheSame(oldItem: WeatherApiResult, newItem: WeatherApiResult): Boolean {
+        return oldItem == newItem
+    }
+}
+
+
