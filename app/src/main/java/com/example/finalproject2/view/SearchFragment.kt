@@ -75,7 +75,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
 
         binding.searchSrc.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(submit: String?): Boolean {
-                viewModel.fetchCity(submit.toString())
+                viewModel.fetchCity(submit.toString(), getString(R.string.places_api_key))
                 return false
             }
 

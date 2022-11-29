@@ -31,7 +31,7 @@ object MainModule {
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db").build()
-            .fallbackToDestructiveMigration().build()
+            //.fallbackToDestructiveMigration().build()
     }
     @Provides
     fun provideWeatherDao(appDatabase: AppDatabase): WeatherDao {

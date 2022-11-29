@@ -18,7 +18,8 @@ class SearchViewModel @Inject constructor(
     val searchCities: LiveData<List<WeatherApiResult>> = repository.getAllSearchedCities()
     val errorMessage = MutableLiveData<String>()
     val showProgress = MutableLiveData(false)
-    fun fetchCity(city: String) {
+
+    fun fetchCity(city: String, apiKey: String) {
         showProgress.postValue(true)
         viewModelScope.launch {
             showProgress.postValue(false)
