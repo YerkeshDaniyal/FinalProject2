@@ -39,3 +39,7 @@ data class Place(
         return photos.contentHashCode()
     }
 }
+data class PlacePhoto(
+    @SerializedName("photo_reference")
+    val photoReference: String
+)
