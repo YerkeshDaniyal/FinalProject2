@@ -16,5 +16,8 @@ data class PhotoReferenceResponse(
 
         return true
     }
+    override fun hashCode(): Int {
+        return candidates.contentHashCode()
+    }
 
 }
