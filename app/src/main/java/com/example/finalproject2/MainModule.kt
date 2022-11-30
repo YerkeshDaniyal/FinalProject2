@@ -5,9 +5,6 @@ import androidx.room.Room
 import com.example.finalproject2.rest.GoogleMapsRetrofitService
  
 
-import android.content.Context
-import androidx.room.Room
- 
 import com.example.finalproject2.room.AppDatabase
 import com.example.finalproject2.room.WeatherDao
 import com.example.finalproject2.rest.WeatherRetrofitConfig
@@ -42,12 +39,15 @@ object MainModule {
         //нужно апдату и дао
  
     }
+
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db").build()
  
             //.fallbackToDestructiveMigration().build()
+
     }
  
     }
@@ -56,7 +56,9 @@ object MainModule {
     fun provideWeatherDao(appDatabase: AppDatabase): WeatherDao {
         return appDatabase.weatherDao()
     }
+
  
+
     @Provides
     @Singleton
     fun provideGoogleMapsRetrofitService(): GoogleMapsRetrofitService {
@@ -66,7 +68,9 @@ object MainModule {
             .build()
         return retrofit.create(GoogleMapsRetrofitService::class.java)
     }
+
 }
  
 }
  
+

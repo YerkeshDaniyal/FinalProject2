@@ -37,25 +37,19 @@ class MainViewModel @Inject constructor(
 
     var city = MutableLiveData<WeatherApiResult>()
     var errorMessage = MutableLiveData<String>()
-    var requestLocation = MutableLiveData<Boolean>()
     val showProgress = MutableLiveData(false)
 
-    fun locationPhone(lat: String, lon: String) {
+    fun fetchCurCity(curCity: String, apiKey: String) {
         showProgress.postValue(true)
         viewModelScope.launch {
-            when (val request = repository.fetchLocationPhone(lat, lon)) {
+            when (val response = repository.fetchCity(curCity, apiKey)) {
                 is Resource.Success -> {
-                    val curCity = request.data ?: return@launch
-                    city.postValue(curCity)
+                    val cityResponse = response.data ?: return@launch
+                    city.postValue(cityResponse)
                     showProgress.postValue(false)
                 }
-                is Resource.Error -> errorMessage.postValue("Error")
+                is Resource.Error -> errorMessage.postValue(response.message.toString())
             }
         }
-    }
-
-    fun requestPermissionGranted() {
-        showProgress.postValue(false)
-        requestLocation.value = true
     }
 }
