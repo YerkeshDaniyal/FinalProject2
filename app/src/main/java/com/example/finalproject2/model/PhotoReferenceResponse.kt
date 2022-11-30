@@ -21,3 +21,8 @@ data class PhotoReferenceResponse(
     }
 
 }
+data class Place(
+    val photos: Array<PlacePhoto>
+) {
+
+}
