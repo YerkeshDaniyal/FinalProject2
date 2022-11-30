@@ -12,7 +12,6 @@ interface WeatherDao {
 
     @Query("SELECT * FROM weather_result")
     fun getAll(): LiveData<List<WeatherApiResult>>
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCity(city: WeatherApiResult)
 }

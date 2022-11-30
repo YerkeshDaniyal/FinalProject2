@@ -6,6 +6,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+
+
+
 import com.example.finalproject2.R
 import com.example.finalproject2.databinding.FragmentHomeBinding
 import com.example.finalproject2.model.IViewProgress
@@ -14,6 +17,13 @@ import com.example.finalproject2.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.roundToInt
+
+ 
+
+const val LOCALITION_PERMISSON_CODE = 1000
+private lateinit var lat: String
+private lateinit var lon: String
+ 
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
@@ -29,9 +39,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
         binding = FragmentHomeBinding.bind(view)
 
+
+ 
         viewModel.fetchCurCity(DEFAULT_CITY, getString(R.string.places_api_key))
-        viewModel.showProgress.observe(viewLifecycleOwner) {
-            showProgress(it)
+        viewModel.showProgress.observe(viewLifecycleOwner)
+        showProgress(it)
+ 
+
         }
     }
 
@@ -74,6 +88,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
 
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null
@@ -87,7 +102,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), IViewProgress {
     companion object {
         private const val DEFAULT_CITY = "Almaty"
     }
+
 }
-
-
 

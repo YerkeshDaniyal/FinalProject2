@@ -1,6 +1,14 @@
 package com.example.finalproject2.repo
 
+
 import com.example.finalproject2.model.PhotoReferenceResponse
+
+ 
+import com.example.finalproject2.rest.WeatherRetrofitConfig
+import com.example.finalproject2.room.WeatherDao
+import com.example.finalproject2.model.WeatherApiResult
+import com.example.finalproject2.rest.GoogleMapsRetrofitService
+
 import com.example.finalproject2.model.WeatherApiResult
 import com.example.finalproject2.rest.GoogleMapsRetrofitService
 import com.example.finalproject2.rest.WeatherRetrofitConfig
@@ -47,4 +55,9 @@ class MainRepository @Inject constructor(
     suspend fun insertSearchedCity(searchedCity: WeatherApiResult) {
         weatherDao.insertCity(searchedCity)
     }
+ 
+
 }
+ 
+}
+ 

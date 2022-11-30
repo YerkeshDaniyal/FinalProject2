@@ -16,11 +16,13 @@ data class PhotoReferenceResponse(
 
         return true
     }
+
     override fun hashCode(): Int {
         return candidates.contentHashCode()
     }
 
 }
+
 data class Place(
     val photos: Array<PlacePhoto>
 ) {
@@ -32,7 +34,9 @@ data class Place(
 
         if (!photos.contentEquals(other.photos)) return false
 
+
         return true
+
     }
 
     override fun hashCode(): Int {

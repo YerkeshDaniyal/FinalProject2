@@ -13,16 +13,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+
+ 
 import coil.load
-import com.example.finalproject2.viewmodel.SearchViewModel
+import com.example.finalproject2.R
+import com.example.climatyweather.viewmodel.SearchViewModel
+
 
 import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.R
 import com.example.finalproject2.adapter.SearchAdapter
-
 import com.example.finalproject2.databinding.FragmentSearchBinding
 import com.example.finalproject2.model.IViewProgress
+import com.example.finalproject2.repo.MainRepository
+import com.example.finalproject2.adapter.SearchAdapter
 import com.example.finalproject2.model.WeatherApiResult
+import com.example.finalproject2.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -32,7 +38,10 @@ import kotlin.math.roundToInt
 class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
     private var _binding: FragmentSearchBinding? = null
 
+ 
+    //  только onCreateView между и между
     // This property is only valid between onCreateView and
+ 
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var adapter: SearchAdapter
