@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.climatyweather.viewmodel.SearchViewModel
+import coil.load
+import com.example.finalproject2.viewmodel.SearchViewModel
 
 import com.example.finalproject2.repo.MainRepository
 import com.example.finalproject2.R
@@ -25,7 +26,6 @@ import com.example.finalproject2.model.WeatherApiResult
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.roundToInt
-
 
 
 @AndroidEntryPoint
@@ -78,7 +78,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
 
         binding.searchSrc.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(submit: String?): Boolean {
-                viewModel.fetchCity(submit.toString())
+                viewModel.fetchCity(submit.toString(), getString(R.string.places_api_key))
                 return false
             }
 
@@ -103,6 +103,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
         val txtFeelsLike = inflater.findViewById<TextView>(R.id.home_txt_feelLike)
         val txtHumidity = inflater.findViewById<TextView>(R.id.home_txt_humidity)
         val txtWind = inflater.findViewById<TextView>(R.id.home_txt_wind)
+        val imgCity = inflater.findViewById<ImageView>(R.id.home_city_photo)
 
         txtCity.text = weather.name
         txtTemp.text = "${weather.main.temp.roundToInt()}C°"
@@ -111,6 +112,12 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
         txtFeelsLike.text = "${weather.main.feels_like.roundToInt()}C°"
         txtHumidity.text = "${weather.main.humidity}%"
         txtWind.text = "${weather.wind.speed} m/s"
+        val requestUrl = String.format(
+            "https://maps.googleapis.com/maps/api/place/photo?photoreference=%s&key=%s&maxwidth=1400&maxheight=600",
+            weather.photoReference,
+            getString(R.string.places_api_key)
+        )
+        imgCity.load(requestUrl)
 
         when (weather.weather[0].icon) {
             "09d", "10d", "11d", "09n", "10n", "11n" -> imgTemp.setImageResource(
@@ -135,4 +142,5 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
         if (enabled) binding.progressCircular.visibility = View.VISIBLE
         else binding.progressCircular.visibility = View.GONE
     }
+
 }
