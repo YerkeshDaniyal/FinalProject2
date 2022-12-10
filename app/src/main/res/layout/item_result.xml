@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        <variable
+            name="cityWeather"
+            type="com.example.finalproject2.model.WeatherApiResult" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     android:layout_marginTop="12dp">
@@ -32,7 +39,7 @@
             android:maxLines="2"
             style="@style/Theme.FinalProject2.BaseTextview"
             android:fontFamily="@font/poppins"
-            android:text="Almaty"
+            android:text="@{cityWeather.name}"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/item_txt_status"
             app:layout_constraintStart_toStartOf="@id/item_txt_country"
@@ -45,7 +52,7 @@
             style="@style/Theme.FinalProject2.BaseTextview"
             android:fontFamily="@font/poppins"
  
-            android:text="Scattered clouds"
+            android:text="@{cityWeather.weather[0].main}"
  
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +64,7 @@
             android:id="@+id/item_txt_temp"
             style="@style/Theme.FinalProject2.BaseTextview"
             android:fontFamily="@font/poppins_medium"
-            android:text="32C°"
+            android:text='@{cityWeather.main.temp}'
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_img_temp"
@@ -68,6 +75,7 @@
             android:id="@+id/item_img_temp"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:src="@{cityWeather.weather[0].icon}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_txt_temp"
@@ -80,3 +88,4 @@
 
  
 </androidx.cardview.widget.CardView>
+</layout>
