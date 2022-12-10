@@ -32,5 +32,5 @@ class MainViewModel @Inject constructor(
                 is Resource.Error -> errorMessage.postValue(response.message.toString())
             }
         }
-
+ 
     }}

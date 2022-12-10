@@ -21,7 +21,7 @@ class SearchViewModel @Inject constructor(
     val errorMessage = MutableLiveData<String>()
     val showProgress = MutableLiveData(false)
 
- 
+
     fun fetchCity(city: String, apiKey: String) {
         showProgress.postValue(true)
         viewModelScope.launch {
@@ -29,7 +29,7 @@ class SearchViewModel @Inject constructor(
             when (val response = repository.fetchCity(city, apiKey)) {
                 is Resource.Success -> {
                /**все должно быть хорошо**/
-
+ 
                 }
                 is Resource.Error -> errorMessage.postValue(response.message.toString())
             }

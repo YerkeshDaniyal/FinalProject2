@@ -15,7 +15,7 @@ import javax.inject.Inject
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-
+ 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 

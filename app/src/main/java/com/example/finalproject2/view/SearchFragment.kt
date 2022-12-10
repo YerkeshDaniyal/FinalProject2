@@ -101,4 +101,5 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding.progressCircular.visibility = if (enabled) View.VISIBLE
         else View.GONE
     }
+
 }
