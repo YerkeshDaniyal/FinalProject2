@@ -2,15 +2,13 @@ package com.example.finalproject2
  
 import android.content.Context
 import androidx.room.Room
+import com.example.finalproject2.repo.MainRepository
+import com.example.finalproject2.repo.MainRepositorylmpl
 import com.example.finalproject2.rest.GoogleMapsRetrofitService
- 
-
-import android.content.Context
-import androidx.room.Room
- 
 import com.example.finalproject2.room.AppDatabase
 import com.example.finalproject2.room.WeatherDao
 import com.example.finalproject2.rest.WeatherRetrofitConfig
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,17 +17,11 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
- 
-@Module
-@InstallIn(SingletonComponent::class)
-object MainModule {
- 
-
 
 @Module
 @InstallIn(SingletonComponent::class)
 object MainModule {
- 
+
     @Provides
     @Singleton
     fun provideRetrofitService(): WeatherRetrofitConfig {
@@ -38,25 +30,20 @@ object MainModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(WeatherRetrofitConfig::class.java)
- 
-        //нужно апдату и дао
- 
     }
+
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
-        return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db").build()
- 
-            //.fallbackToDestructiveMigration().build()
+        return Room.databaseBuilder(appContext, AppDatabase::class.java, "weather-db")
+            .fallbackToDestructiveMigration().build()
     }
- 
-    }
- 
+
     @Provides
     fun provideWeatherDao(appDatabase: AppDatabase): WeatherDao {
         return appDatabase.weatherDao()
     }
- 
+
     @Provides
     @Singleton
     fun provideGoogleMapsRetrofitService(): GoogleMapsRetrofitService {
@@ -67,6 +54,11 @@ object MainModule {
         return retrofit.create(GoogleMapsRetrofitService::class.java)
     }
 }
- 
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class RepositoryModule {
+
+    @Binds
+    abstract fun bindsMainRepository(mainRepositorylmpl: MainRepositorylmpl): MainRepository
 }
- 
+

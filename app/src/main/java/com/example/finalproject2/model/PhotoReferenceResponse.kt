@@ -1,6 +1,6 @@
 package com.example.finalproject2.model
 
-import com.google.gson.annotations.SerializedName
+import   com.google.gson.annotations.SerializedName
 import retrofit2.http.Field
 
 data class PhotoReferenceResponse(
@@ -32,7 +32,6 @@ data class Place(
         other as Place
 
         if (!photos.contentEquals(other.photos)) return false
-        //
         return true
 
     }

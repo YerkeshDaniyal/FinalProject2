@@ -6,4 +6,7 @@
     <string name="favorite">Favorite</string>
     <string name="not_implemented">This feature it is not implemented yet :(</string>
     <string name="places_api_key">AIzaSyDzjfbu4gEOsmnZPLdRNyEK01jFIgHFHTg</string>
+    <string name="temp">%dC°</string>
+    <string name="humidity">%d%%</string>
+    <string name="wind">%.1f m/s°</string>
 </resources>

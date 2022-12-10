@@ -5,42 +5,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.SearchView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
- 
-import coil.load
 import com.example.finalproject2.R
-import com.example.climatyweather.viewmodel.SearchViewModel
-
 import com.example.finalproject2.repo.MainRepository
-import com.example.finalproject2.R
 import com.example.finalproject2.adapter.SearchAdapter
+import com.example.finalproject2.databinding.FragmentHomeBinding
 import com.example.finalproject2.databinding.FragmentSearchBinding
-import com.example.finalproject2.model.IViewProgress
-import com.example.finalproject2.repo.MainRepository
-import com.example.finalproject2.adapter.SearchAdapter
 import com.example.finalproject2.model.WeatherApiResult
 import com.example.finalproject2.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.math.roundToInt
+import androidx.databinding.DataBindingUtil
  
 @AndroidEntryPoint
-class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
-    private var _binding: FragmentSearchBinding? = null
-
- 
-    //  только onCreateView между и между
-    // This property is only valid between onCreateView and
- 
-    // onDestroyView.
-    private val binding get() = _binding!!
+class SearchFragment : Fragment(R.layout.fragment_search) {
+    private lateinit var binding: FragmentSearchBinding
     private lateinit var adapter: SearchAdapter
 
     @Inject
@@ -62,13 +46,13 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.fragment_search,
+            container,
+            false
+        )
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onResume() {
@@ -99,53 +83,22 @@ class SearchFragment : Fragment(R.layout.fragment_search), IViewProgress {
     private fun openDialog(weather: WeatherApiResult) {
 
         val builder = AlertDialog.Builder(requireContext())
-        val inflater = requireActivity().layoutInflater.inflate(R.layout.fragment_home, null)
-
-        val txtCity = inflater.findViewById<TextView>(R.id.home_txt_city)
-        val imgTemp = inflater.findViewById<ImageView>(R.id.home_img_now)
-        val txtTemp = inflater.findViewById<TextView>(R.id.home_txt_temp)
-        val txtWeather = inflater.findViewById<TextView>(R.id.home_txt_weather)
-        val txtStatus = inflater.findViewById<TextView>(R.id.home_txt_stats)
-        val txtFeelsLike = inflater.findViewById<TextView>(R.id.home_txt_feelLike)
-        val txtHumidity = inflater.findViewById<TextView>(R.id.home_txt_humidity)
-        val txtWind = inflater.findViewById<TextView>(R.id.home_txt_wind)
-        val imgCity = inflater.findViewById<ImageView>(R.id.home_city_photo)
-
-        txtCity.text = weather.name
-        txtTemp.text = "${weather.main.temp.roundToInt()}C°"
-        txtWeather.text = weather.weather[0].main
-        txtStatus.text = weather.weather[0].description
-        txtFeelsLike.text = "${weather.main.feels_like.roundToInt()}C°"
-        txtHumidity.text = "${weather.main.humidity}%"
-        txtWind.text = "${weather.wind.speed} m/s"
-        val requestUrl = String.format(
-            "https://maps.googleapis.com/maps/api/place/photo?photoreference=%s&key=%s&maxwidth=1400&maxheight=600",
-            weather.photoReference,
-            getString(R.string.places_api_key)
+        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+            requireActivity().layoutInflater,
+            R.layout.fragment_home,
+            null,
+            false
         )
-        imgCity.load(requestUrl)
 
-        when (weather.weather[0].icon) {
-            "09d", "10d", "11d", "09n", "10n", "11n" -> imgTemp.setImageResource(
-                R.drawable.rain
-            )
-            "01d" -> imgTemp.setImageResource(R.drawable.sun)
-            "02d", "03d" -> imgTemp.setImageResource(R.drawable.sun_cloud)
-            "01n" -> imgTemp.setImageResource(R.drawable.moon)
-            "02n", "03n" -> imgTemp.setImageResource(R.drawable.moon_cloud)
-            "04d", "13d", "50d", "04n", "13n", "50n" -> imgTemp.setImageResource(
-                R.drawable.cloud
-            )
-        }
-
-        builder.setView(inflater)
+        binding.cityWeather = weather
+        builder.setView(binding.root)
         builder.create()
         builder.show()
 
     }
 
-    override fun showProgress(enabled: Boolean) {
-        if (enabled) binding.progressCircular.visibility = View.VISIBLE
-        else binding.progressCircular.visibility = View.GONE
+    private fun showProgress(enabled: Boolean) {
+        binding.progressCircular.visibility = if (enabled) View.VISIBLE
+        else View.GONE
     }
 }
