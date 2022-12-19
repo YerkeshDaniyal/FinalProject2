@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchCurCity(DEFAULT_CITY, getString(R.string.places_api_key))
+        viewModel.fetchCurCity(DEFAULT_CITY, "API_KEY")
         viewModel.showProgress.observe(viewLifecycleOwner) {
             showProgress(it)
         }
